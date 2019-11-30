@@ -1,0 +1,7 @@
+.container-fluid {
+	border: 1px solid #c8c8c8;
+	border-radius: 1rem;
+}
+.card {
+	margin: 10px;
+}

@@ -1,0 +1,5 @@
+# You can specialize this file for each language.
+# For example, for French create a messages.fr file
+#
+validation.required = por favor digite um valor
+validation.email = Digite um email válido
