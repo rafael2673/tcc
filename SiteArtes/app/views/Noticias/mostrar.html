@@ -1,0 +1,31 @@
+#{extends 'main.html'/} #{set title:'Lista de noticias' /}
+
+<form method="post" action="@{Noticias.mostrar}">
+	<input type="text" name="busca" class="form-control">
+	<button value="Pesquisar" class="btn btn-outline-info">Pesquisar</button>
+</form>
+<style>
+.form-control {
+	margin-top: 30px;
+	display: inline-block;
+	width: 67%;
+}
+
+.btn {
+	width: 27%;
+}
+</style>
+#{list items:not, as:'not'}
+${not?.texto.raw()}
+#{if session.get("usuario.nivel").equals("admin")}
+<a href='@{Noticias.editar(not?.id)}'
+	style="color: white; text-transform: uppercase;"> Editar <img
+	src="../public/images/l.png" style="width: 20px;"></a>
+|
+<a href='@{Noticias.deletar(not.id)}'
+	style="color: white; text-transform: uppercase;"> Deletar <img
+	src="../public/images/x.png" style="width: 20px;">
+</a>
+#{/if}
+<hr />
+#{/list}

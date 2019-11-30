@@ -1,0 +1,55 @@
+#{extends 'main.html'/}
+#{set title:'Gerenciar administradores' /}
+#{if session.get("usuario.nivel").equals("admin")}
+<link rel = "stylesheet" type="text/css" media = "screen" href = "@{'/public/stylesheets/play-pagination.css'}"> 
+<h1>Tabela de usuários</h1>
+
+<form method="post" class = "form-inline" action="@{Usuarios.gerenciar}">
+	<input type="text" name="busca" class="form-control w-75">
+	<button value="Pesquisar" class="btn btn-outline-info w-25" >Pesquisar</button>
+</form>
+<br/>
+<table class="table">
+	<thead class="thead-dark">
+		<tr>
+			<th scope="col">Nome</th>
+			<th scope="col">Email</th>
+			<th scope="col">Nível</th>
+		</tr>
+	</thead>
+	<tbody>
+		#{paginate.list items:listaPaginada, as:'l'}
+		<tr>
+			<td>${l.nome} ${l.sobrenome}</td>
+			<td>${l.email}</td>
+			<td>
+				<form action = "@{Usuarios.editarNivel}">
+					<input type="hidden" value = "${l.id}" name = "id">
+					<div class = "input-group">
+						<select name = "n" class="custom-select">
+							<option value = "ADMIN" #{if l.nivel.equals(l.nivel.ADMIN)} selected #{/if}>Administrador</option>
+							<option value = "COMUM" #{if l.nivel.equals(l.nivel.COMUM)} selected #{/if}>Usuário comum</option>
+						</select>
+						<div class="input-group-append">
+							<button class="btn btn-outline-secondary btn-sm">Mudar nível</button>
+						</div>
+					</div>
+				</form>
+			</td>
+		</tr>
+		#{/paginate.list}
+		#{else}
+		<tr>
+			<td colspan="4">Nenhum Aluno cadastrado</td>
+		</tr>
+		#{/else}
+	</tbody>
+</table>
+
+		#{paginate.controls items:listaPaginada/}
+#{/if}
+#{else}
+
+<h1 class = "alert-warning">Acesso apenas para os administradores do sistema</h1>
+
+#{/else}

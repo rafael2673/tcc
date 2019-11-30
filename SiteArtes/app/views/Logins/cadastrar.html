@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Cadastro de Usuários</title>
+<!-- Meta tags -->
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords"
+	content="Jolly Login Form Responsive Widget, Audio and Video players, Login Form Web Template, Flat Pricing Tables, Flat Drop-Downs, Sign-Up Web Templates, Flat Web Templates, Login Sign-up Responsive Web Template, Smartphone Compatible Web Template, Free Web Designs for Nokia, Samsung, LG, Sony Ericsson, Motorola Web Design" />
+
+<!-- Meta tags -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<!-- font-awesome icons -->
+<link rel="stylesheet" href="/public/stylesheets/font-awesome.min.css" />
+
+<!-- //font-awesome icons -->
+<!--stylesheets-->
+<link href="/public/stylesheets/style.css" rel='stylesheet'
+	type='text/css' media="all">
+<!--//style sheet end here-->
+
+<link href="//fonts.googleapis.com/css?family=Poiret+One"
+	rel="stylesheet">
+
+</head>
+<body>
+
+	<h1>Cadastrar</h1>
+
+	<div class="main-w3">
+		#{ifErrors}
+			<span class = "alert alert-danger">Ooops...</span>
+		#{/ifErrors}
+		#{if flash.error}
+			<span class = "alert alert-danger">${flash.error}</span>
+		#{/if}
+		<form action="@{Logins.salvar}" method="post">
+			<h2>
+				<span class="fa fa-user t-w3" aria-hidden="true"></span>
+			</h2>
+			<div class="login-w3ls">
+				<div class="icons">					
+				</div>
+				<div class="icons">
+					<input type="text" name="l.nome" placeholder="Primeiro nome" value = "${l?.nome}" >
+					<span class="fa fa-user"></span>
+					<div class="clear"></div>
+				</div>
+				<span style="color: red;">#{error 'l.nome' /}</span>
+				<br/>
+				<div class="icons">
+					<input type="text" name="l.sobrenome" value = "${l?.sobrenome}" placeholder="Sobrenome(s)" >
+					<span class="fa fa-user"></span>
+					<div class="clear"></div>
+				</div>
+				<span style="color: red;">#{error 'l.sobrenome' /}</span>
+				<br/>
+				<div class="icons">
+					<input type="text" name="l.email" value = "${l?.email}"  placeholder="Email" >
+					<span class="fa fa-envelope"></span>
+					<div class="clear"></div>
+				</div>
+				<span style="color: red;">#{error 'l.email' /}</span>
+				<br/>
+				<div class="icons">
+					<input type="password" name="l.senha" placeholder="Senha" >
+					<span class="fa fa-key"></span>
+					<div class="clear"></div>
+				</div>
+				<span style="color: red;">#{error 'l.senha' /}</span>
+				<br/>
+				<div class="icons">
+					<input type="text" name="l.cidade" value = "${l?.cidade}"  placeholder="Cidade" >
+					<span class="fa fa-building"></span>
+					<div class="clear"></div>
+				</div>
+				<span style="color: red;">#{error 'l.cidade' /}</span>
+				<br/>
+				<div class="icons">
+					<input type="text" class = "celular" name="l.numero" value = "${l?.numero}"  placeholder="(XX)XXXXX-XXXX" >
+					<span class="fa fa-phone"></span>
+					<div class="clear"></div>					
+				</div>
+				<span style="color: red;">#{error 'l.numero' /}</span>
+				<br/>
+				<div class="icons">
+					<input type="text" class = "cpf" name="l.cpf" value = "${l?.cpf}"  placeholder="XXX.XXX.XXX-XX" >
+					<div class="clear"></div>
+					<span>CPF</span>
+				</div>
+				<span style="color: red;">#{error 'l.cpf' /}</span>
+			</div>
+				<div class="btnn">
+					<button type="submit">Cadastrar</button>
+				</div>
+		</form>
+		
+	<h4>
+		Já possui login? <b><a href="@{Logins.form}">Logar</a></b>
+	</h4>
+</div>
+
+
+
+	<script type="text/javascript" src="/public/javascripts/jquery-3.4.1.min.js"></script>
+	<script type="text/javascript" src="/public/javascripts/jquery.mask.min.js"></script>
+	<script type="text/javascript" src="/public/javascripts/mask.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+</body>
+</html>

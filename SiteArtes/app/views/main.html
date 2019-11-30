@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<title>#{get 'title' /}</title>
+<meta charset="${_response_encoding}">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" media="screen"
+	href="@{'/public/stylesheets/main.css'}">
+<link rel="shortcut icon" type="image/png"
+	href="@{'/public/images/iconeInicio.png'}">
+#{get 'moreStyles' /}
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<link
+	href="https://fonts.googleapis.com/css?family=Satisfy&display=swap"
+	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light+Two&display=swap" rel="stylesheet">
+<!-- 	<script src="@{'/public/javascripts/jquery-3.4.1.min.js'}"></script> -->
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+	crossorigin="anonymous"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+	crossorigin="anonymous"></script>
+
+#{get 'moreScripts' /}
+
+</head>
+<body lang="pt-br">
+	<nav class="navbar navbar-dark bg-dark">
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarToggleExternalContent"
+			aria-controls="navbarToggleExternalContent" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="list-group-item bg-dark">
+			<p class="h1">NUARTE</p>
+		</div>
+	</nav>
+	<div class="pos-f-t">
+		<div class="collapse" id="navbarToggleExternalContent">
+			<div class="bg-dark p-4">
+				<h5 class="text-white h5">
+					<a id="inicio" href="@{Noticias.inicial}"><span>início</span></a>
+				</h5>
+				<h5 class="text-white h5">
+					<a id="galeria" href="@{Galerias.fotos}"><span>galeria</span></a>
+				</h5>
+
+				<h5 class="text-white h5">
+					<a id="noticias" href="@{Noticias.mostrar}"><span>notícias</span></a>
+				</h5>
+				<h5 class="text-white h5">
+					<a id="historia" href="@{Historias.historia}"><span>história</span></a>
+				</h5>
+
+
+
+
+
+
+				#{if session.get("usuario.nivel")}
+				<h5 class="text-white h5">
+					<span><a id="vozDigital" href="@{VozDigital.forum}">voz digital</a></span>
+				</h5>
+				<h5 class="text-white h5">
+					<span> <a id="curso" href="@{Cursos.curso}">cursos</a></span>
+				</h5>
+				<h5 class="text-white h5">
+					#{if session.get("usuario.nivel").equals("admin")} <span><a
+						id="gerencia" href="@{Usuarios.gerenciar}">gerenciar
+							administradores</a></span>
+				</h5>
+					#{/if}
+				<h5 class="text-white h5">
+					<span><a id="sair" href="@{Logins.logout}">sair</a></span>
+				</h5>
+				<h5 class="text-white h5">
+				#{/if} 
+				#{else}
+					<span><a id="login" href="@{Logins.form}">login</a></span> 
+				#{/else}
+				</h5>
+			</div>
+		</div>
+
+
+	</div>
+
+
+	#{if flash.error}
+	<div class="alert alert-danger" style="margin-bottom: 0; border: 0;">${flash.error}</div>
+	#{/if} #{if flash.success}
+	<div class="alert alert-success" style="margin-bottom: 0; border: 0;">${flash.success}</div>
+	#{/if}
+
+	<!-- Botons -->
+<!-- 
+	<a href="#"><img class="sociais" id="p1"
+		src="/public/images/instagram.png"> </a><br>
+
+	<a href="#"><img class="sociais" id="p2"
+		src="/public/images/facebook.png"> </a><br>
+
+	<a href="#"><img class="sociais" id="p3"
+		src="/public/images/twitter.png"> </a>
+
+
+
+	<a href="http://portal.ifrn.edu.br/campus/joaocamara" target="nova aba"><img
+		id="botao" src="/public/images/ifrnLogo.png"></a>
+	<a id="inicio" href="@{Noticias.inicial}" target="nova aba"><img
+		id="botao2" src="/public/images/logoNuarte.png"></a>
+ -->
+	<!-- final botons -->
+
+	<div class="container">#{doLayout /}</div>
+	<script src="@{'/public/javascripts/main.js'}"></script>
+	<!-- Rodapé das páginas -->
+
+
+
+
+	<div class="footer-menu container-fluid">
+
+
+		<div class="row">
+			<div class="col-3">BR-406 KM 73, 3500 - Perímetro Rural,
+				João Câmara - RN, 59550-000</div>
+
+			<div class="col-8">
+
+				<div id="pe">
+
+					A ideia do NUARTE, é fazer com que a <i>sala preta</i> seja um
+					equipamento vivo, presente no cotidiano cultural da população do
+					Campus João Câmara.
+
+				</div>
+
+
+				<div id="pepe">
+					<i> Prof. Dr. Rummenigge Medeiros de Araújo </i>
+
+				</div>
+			</div>
+
+
+
+		</div>
+	</div>
+
+
+
+</body>
+</html>

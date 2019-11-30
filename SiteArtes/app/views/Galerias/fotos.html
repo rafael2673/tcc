@@ -1,0 +1,62 @@
+#{extends 'main.html' /} #{set title:'Galeria' /}
+#{set 'moreStyles'}
+<link rel = "stylesheet" href="/public/stylesheets/gallery-grid.css">
+<link rel = "stylesheet" href="/public/stylesheets/galeria.css">
+<link rel="stylesheet" 
+href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.css">
+#{/set}
+
+
+<!-- Lembrar de adicionar a funcionalidade de deletar as imagens -->
+<section class="gallery-block compact-gallery">
+	<div class="container">	
+		<h1>Galeria</h1>
+	   #{if session.get("usuario.nivel").equals("admin")}
+			<form action="@{Galerias.picture}" method="post" enctype="multipart/form-data">
+				<label>Upload de Imagem:</label>
+				<div class="input-group mb-3">
+			  		<div class="custom-file">
+					    <input type="file" class="custom-file-input" name = "pic" id="inputGroupFile03">
+					    <label class="custom-file-label" for="inputGroupFile03">Envie o arquivo</label>
+					</div>
+				</div>
+					<div class = "form-group">
+						<label for="título">Título:</label>
+						<input type="text" class="form-control" name = "ft.titulo">
+					</div>
+					<div class = "form-group">
+						<label for="desrição">Descrição:</label>
+						<input type="text" class="form-control" name = "ft.titulo">
+					</div>
+		  			<div class="input-group-prepend">
+		    			<button class="btn btn-outline-dark" type="submit">Enviar</button>
+		  			</div>
+			</form>
+			<br>
+		#{/if}
+		<div class="row no-gutters">
+			#{list items:lista, as: 'ft'}
+				<div class="col-md-6 col-lg-4 item zoom-on-hover">
+					<a class="lightbox" href="/uploads/Fotos/${ft.nomeFoto}"> 
+						<img class="img-fluid image" src="/uploads/Fotos/${ft.nomeFoto}">
+						<span class="description">
+	    					<span class="description-heading">${ft?.titulo}</span><br/>
+	    					<span class="description-body">${ft?.descricao}</span>
+	    				</span>
+					</a>
+				</div>
+	    				#{if session.get("usuario.nivel").equals("admin")}
+							<a href='@{Galerias.deletar(ft.id)}' style="width: 50px; z-index: 1;"> 
+								<img src="../public/images/x.png">
+							</a>
+						#{/if}
+				#{/list}
+		</div>
+		<br>
+	</div>
+</section> 
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
+<script>
+	baguetteBox.run('.compact-gallery');
+</script>

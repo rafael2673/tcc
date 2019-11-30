@@ -1,0 +1,117 @@
+#{extends 'main.html' /} #{set title:'CURSOS' /} #{set 'moreStyles'}
+#{stylesheet 'curso.css'/} #{/set} 
+#{if session.get("usuario.nivel").equals("admin")}
+<div class="container-fluid">
+	<!-- Formulário de adição de conteúdo visível apenas pelo administrador-->
+	<form id="adc" action="@{Cursos.salvar}" method="post">
+		<input type="hidden" name="curso.id" value="${curso?.id}"> <label
+			class="col-form-label">Nome do Curso: </label>
+		<div class="col-10">
+			<input type="text" name="curso.nome" value="${curso?.nome}"
+				class="form-control texto">
+		</div>
+		<hr>
+		<label for="curso.descricao" class="col-form-label">Descrição:
+		</label>
+		<div class="col-10">
+			<textarea name="curso.descricao" rows="10" cols="50"
+				class="form-control texto">${curso?.descricao}</textarea>
+		</div>
+		<label class="col-form-label">Data Final:</label>
+		<div class="col-10">
+			<input type="text" class = "date" name = "curso.dataFinal" value = "${curso?.dataFinal}">
+		</div>
+		<br> <a href="@{Cursos.salvar}"></a>
+		<button class="btn btn-outline-sucess btn-sm position-relative"
+			style="left: 77%;">
+			<img alt="" src="/public/images/seta.png" style="width: 35px;">
+		</button>
+		<hr />
+	</form>
+	#{if id == null}
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$("#adc").hide();
+	
+				$("#btnMostrar").click(function(e) {
+					$("#adc").show("slow");
+					$("#btnMostrar").hide();
+				});
+			});
+		</script>
+			#{if lista}
+				<button id="btnMostrar" class="btn btn-outline-sucess btn-sm">
+					<img src="/public/images/plus.png">
+				</button>
+			#{/if}
+	#{/if}
+	 #{/if}
+	
+	<!-- Listando os cursos disponíveis no banco de dados -->
+	<div class="row">
+		#{list items:lista, as: 'curso'}
+		<div class="card" style="width: 18rem;">
+			<div class="card-body">
+				<input type="hidden" name="curso.id" value="${curso?.id}">
+				<h5 class="card-title">${curso.nome}</h5>
+				<p class="card-text">${curso.descricao}</p>
+				<!-- Definindo o nível de acesso de algumas das funcionalidades -->
+				#{if session.get("usuario.nivel").equals("admin")} 
+					<!-- Rota que envia para o método avaliar e retorna uma lista de candidatos inscritos no curso -->
+					<a href="@{CursosLogin.avaliar(curso?.id)}" class="btn btn-primary">Avaliar</a>
+					<a href="@{Cursos.editar(curso?.id)}">
+						<img src="../public/images/l.png">
+					</a> 
+					<a href="@{Cursos.remover(curso?.id)}">
+						<img src="../public/images/x.png">
+					</a> 
+				#{/if} 
+			
+			<!-- Caso não tenha o nível de administrador a view irá mostrar essas opções -->
+			#{else} 				
+				#{if curso.inscrito}
+					<p class="alert alert-success">Inscrito</p>
+				#{/if} 
+				#{elseif curso.emEspera} 
+					<p class="alert alert-warning">Em espera</p>
+				#{/elseif}
+				#{elseif curso.naoInscrito}
+					<p class="alert alert-danger">Não selecionado</p>
+				#{/elseif}	
+				#{else}
+				
+					
+				<!-- Caso nenhuma das opções seja verdadeira, quer dizer que o usuário não se inscreveu no curso, então aparece essa opção -->
+					<a href="@{CursosLogin.salvar(curso?.id,  session.get('usuario.id') ) }"
+					class="btn btn-primary">Se inscrever</a><br> 
+					<!-- 
+					#{else}
+						<p class = "alert alert-light">Inscrições finalizadas</p>
+					#{/else}
+					 -->
+				#{/else}
+			#{/else}
+				
+			</div>
+		</div>
+		#{/list}
+	</div>
+
+	#{else}
+		#{if id == null}
+			<div class="card " style="width: 18rem;">
+				<div class="card-body">
+					<h5 class="card-title">Nenhum curso cadastrado</h5>
+					#{if session.get("usuario.nivel").equals("admin")}
+					<p class="card-text">vamos cadastrar?</p>
+					<button id="btnMostrar" class="btn btn-primary">Cadastrar
+						novo curso</button>
+					#{/if}
+				</div>
+			</div>
+		#{/if}
+	#{/else}
+</div>
+
+<script src= "/public/javascripts/jquery.mask.min.js"></script>
+<script src= "/public/javascripts/mask.js"></script>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Esqueci minha senha</title>
+<!-- Meta tags -->
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords"
+	content="Jolly Login Form Responsive Widget, Audio and Video players, Login Form Web Template, Flat Pricing Tables, Flat Drop-Downs, Sign-Up Web Templates, Flat Web Templates, Login Sign-up Responsive Web Template, Smartphone Compatible Web Template, Free Web Designs for Nokia, Samsung, LG, Sony Ericsson, Motorola Web Design" />
+<script type="application/x-javascript">
+	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
+</script>
+<!-- Meta tags -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<!-- font-awesome icons -->
+<link rel="stylesheet" href="/public/stylesheets/font-awesome.min.css" />
+
+<!-- //font-awesome icons -->
+<!--stylesheets-->
+<link href="/public/stylesheets/style.css" rel='stylesheet'
+	type='text/css' media="all">
+<!--//style sheet end here-->
+
+<link href="//fonts.googleapis.com/css?family=Poiret+One"
+	rel="stylesheet">
+
+</head>
+<body>
+	
+	<h1>Recuperação de Senha</h1>
+	
+	<div class="main-w3">
+		#{if flash.error}
+			<span class = "alert alert-danger">${flash.error}</span>
+		#{/if}
+		<form action="@{Logins.enviarEmail}" method="post">
+			<h2>
+				<span class="fa fa-user t-w3" aria-hidden="true"></span>
+			</h2>
+			<div class="login-w3ls">
+				<div class="icons">
+
+					<input type="email" name="email" placeholder="Email" required>
+					<span class="fa fa-user" aria-hidden="true"></span>
+					<div class="clear"></div>
+				</div>
+				<div class="btnn">
+					<button type="submit">Enviar</button>
+				</div>
+			</div>
+		</form>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>
