@@ -3,92 +3,117 @@
 <br />
 <h1>VOZ DIGITAL</h1>
 <br />
-#{if session.get("usuario.nivel")} #{paginate.list items:listaPaginada2,
-as:'l'}
-<div class="card" style="width: 18rem;">
-	<div class="card-body">
-		<h5 class="card-title">${l.titulo}</h5>
-		<h6 class="card-subtitle mb-2 text-muted">${l.nome}</h6>
-		<p class="card-text">${l.descricao}</p>
-		<a target="_blank" href="/uploads/pdf/${l?.pdf}">${l.pdf}</a>
+
+<nav>
+  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Home</a>
+    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</a>
+    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</a>
+  </div>
+</nav>
+
+<!-- Listagem de publicações adicionadas no sistema -->
+<div class="tab-content" id="nav-tabContent">
+  <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+  <br/>
+  	#{if session.get("usuario.nivel")} #{paginate.list items:listaPaginada2, as:'l'}
+		<div class="card" style="width: 18rem;">
+			<div class="card-body">
+				<h5 class="card-title">${l.titulo}</h5>
+				<h6 class="card-subtitle mb-2 text-muted">${l.nome}</h6>
+				<p class="card-text">${l.descricao}</p>
+				<a target="_blank" href="/uploads/pdf/${l?.pdf}">${l.pdf}</a>
+				
+				<br /> 
+				#{if
+				session.get("usuario.nivel").equals("admin")} 
+				<a href='@{VozDigital.deletar(l.id)}' > 
+				<img src="../public/images/x.png" style="width: 20px;"> </a> 
+				#{/if} 
+				<br />
+			</div>
+		</div>
 		
-		<br /> 
-		#{if
-		session.get("usuario.nivel").equals("admin")} 
-		<a href='@{VozDigital.deletar(l.id)}' > 
-		<img src="../public/images/x.png" style="width: 20px;"> </a> 
-		#{/if} 
+		#{/paginate.list} #{else}
+		<p>Nenhum trabalho avaliado</p>
+		#{/else} #{/if}
+  </div>
+  
+  
+<!-- Tabela de trabalhos enviados -->
+  <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+		#{if session.get("usuario.nivel").equals("admin")}
 		<br />
-	</div>
+		<br />
+		<table class="table table-striped table-dark">
+			<thead>
+				<tr>
+					<th scope="col">Nome do usuário</th>
+					<th scope="col">Título</th>
+					<th scope="col">Descrição</th>
+					<th scope="col">PDF</th>
+					<th scope="col">Avaliar</th>
+				</tr>
+			</thead>
+			<tbody>
+				#{paginate.list items:listaPaginada, as:'l'}
+				<tr>
+					<td>${l?.nome}</td>
+					<td>${l?.titulo}</td>
+					<td>${l?.descricao}</td>
+					<td><a target="_blank" href="/uploads/pdf/${l?.pdf}">${l?.pdf}</a></td>
+					<td>
+						<form action="@{VozDigital.publicacao}">
+							<input type="hidden" value="${l.id}" name="id">
+							<div class="input-group">
+								<select name="n" class="custom-select">
+									<option value="ATIVO">Publicar</option>
+									<option value="INATIVO">Não Publicar</option>
+								</select>
+								<div class="input-group-append">
+									<button class="btn btn-outline-secondary btn-sm">Enviar</button>
+								</div>
+							</div>
+						</form>
+					</td>
+				</tr>
+				#{/paginate.list} #{else}
+				<td colspan="5">Nenhuma solicitação de envio</td> #{/else}
+			</tbody>
+		</table>
+		#{/if}
+  </div>
+
+<!-- Formulario de envio -->
+  <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">	
+		#{if session.get("usuario.nivel")}
+		<br />
+		<br />
+		<form action="@{VozDigital.salvar}" method="post"
+			enctype="multipart/form-data">
+			<input type="hidden" name="v.id" value="${v?.id}">
+			<div class="form-group">
+				<label for="exampleFormControlInput1">Título do Trabalho</label> <input
+					type="text" class="form-control" id="exampleFormControlInput1"
+					name="v.titulo" value="${v?.titulo}" placeholder="Título">
+			</div>
+			<div class="form-group">
+				<label for="exampleFormControlTextarea1">Descrição</label>
+				<textarea class="form-control" name="v.descricao"
+					id="exampleFormControlTextarea1" rows="3">${v?.descricao}</textarea>
+			</div>
+			<div>
+				<label for="pdf">Arquivo</label> <input type="file" name="pdf"
+					class="form-control" accept="application/pdf">
+			</div>
+			<br />
+			<button type="submit" class="btn btn-primary mb-2">Enviar</button>
+		</form>
+		#{/if}
+  </div>
 </div>
 
-#{/paginate.list} #{else}
-<p>Nenhum trabalho avaliado</p>
-#{/else} #{/if}
 
-<!-- Tabela de envio -->
-#{if session.get("usuario.nivel").equals("admin")}
-<br />
-<br />
-<table class="table table-striped table-dark">
-	<thead>
-		<tr>
-			<th scope="col">Nome do usuário</th>
-			<th scope="col">Título</th>
-			<th scope="col">Descrição</th>
-			<th scope="col">PDF</th>
-			<th scope="col">Avaliar</th>
-		</tr>
-	</thead>
-	<tbody>
-		#{paginate.list items:listaPaginada, as:'l'}
-		<tr>
-			<td>${l?.nome}</td>
-			<td>${l?.titulo}</td>
-			<td>${l?.descricao}</td>
-			<td><a target="_blank" href="/uploads/pdf/${l?.pdf}">${l?.pdf}</a></td>
-			<td>
-				<form action="@{VozDigital.publicacao}">
-					<input type="hidden" value="${l.id}" name="id">
-					<div class="input-group">
-						<select name="n" class="custom-select">
-							<option value="ATIVO">Publicar</option>
-							<option value="INATIVO">Não Publicar</option>
-						</select>
-						<div class="input-group-append">
-							<button class="btn btn-outline-secondary btn-sm">Enviar</button>
-						</div>
-					</div>
-				</form>
-			</td>
-		</tr>
-		#{/paginate.list} #{else}
-		<td colspan="5">Nenhuma solicitação de envio</td> #{/else}
-	</tbody>
-</table>
-#{/if}
-<!-- Formulario de envio -->
-#{if session.get("usuario.nivel").equals("comum")}
-<br />
-<br />
-<form action="@{VozDigital.salvar}" method="post"
-	enctype="multipart/form-data">
-	<input type="hidden" name="v.id" value="${v?.id}">
-	<div class="form-group">
-		<label for="exampleFormControlInput1">Título do Trabalho</label> <input
-			type="text" class="form-control" id="exampleFormControlInput1"
-			name="v.titulo" value="${v?.titulo}" placeholder="Título">
-	</div>
-	<div class="form-group">
-		<label for="exampleFormControlTextarea1">Descrição</label>
-		<textarea class="form-control" name="v.descricao"
-			id="exampleFormControlTextarea1" rows="3">${v?.descricao}</textarea>
-	</div>
-	<div>
-		<label for="pdf">Arquivo</label> <input type="file" name="pdf"
-			class="form-control">
-	</div>
-	<br />
-	<button type="submit" class="btn btn-primary mb-2">Enviar</button>
-</form>
-#{/if}
+
+
+
