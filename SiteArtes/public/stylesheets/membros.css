@@ -1,0 +1,68 @@
+h1 {
+	font-family: 'Yu Gothic UI Light';
+	color: black;
+	padding: 20px;
+	position: relative;
+	width: 500px;
+	letter-spacing: 5px;
+}
+
+#z {
+	position: relative;
+	left: 105px;
+}
+
+#but {
+	position: relative;
+	left: 300px;
+}
+
+label {
+	font-family: 'Yu Gothic UI Light';
+	text-transform: uppercase;
+	color: black;
+}
+
+.card-deck {
+	width: 1000px;
+	margin: 0 auto !important;
+}
+
+.card-fluid {
+	border-radius: 0.75rem !important;
+	border: 1px solid #c8c8c8 !important;
+}
+
+.img-fluid {
+	border-radius: 0.75rem 0.75rem 0rem 0rem;
+}
+
+.card-body {
+	background-color: white !important;
+	border-radius: 0rem 0rem 0.75rem 0.75rem !important;
+}
+.caixaa{
+		background-color: white !important;
+		color:#808080;
+		font-family: 'Yu Gothic UI Light';
+		
+	}
+.card-text {
+	color: #808080;
+	font-family: 'Yu Gothic UI Light';
+	
+}
+
+.card, .text-fluid {
+	background-color: #161616;
+}
+
+#colorindo {
+	color: #636363;
+	font-family: 'Yu Gothic UI Light';
+	text-transform: uppercase;
+	letter-spacing: 5px;
+}
+.card-title {
+	text-align: center;
+}

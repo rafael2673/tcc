@@ -1,0 +1,236 @@
+body {
+	background-color: white !important;
+}
+
+.pos-f-t {
+	margin: 0px;
+	background-color: #252525;
+	list-style: none;
+	border: 1px solid #3f3f3f;
+	font-family: 'Caveat', cursive;
+}
+
+li a {
+	display: block;
+	text-decoration: none;
+}
+
+span {
+	font-size: 24px;
+}
+/*colorindo as letras*/
+#inicio {
+	color: white;
+	text-align: center;
+}
+
+#inicio:hover {
+	color: #14dbff;
+	text-align: center;
+}
+
+#agenda {
+	color: white;
+	text-align: center;
+}
+
+#agenda:hover {
+	color: #ff7214;
+	text-align: center;
+}
+
+#galeria {
+	color: white;
+	text-align: center;
+}
+
+#galeria:hover {
+	color: #ff14ff;
+	text-align: center;
+}
+
+#noticias {
+	color: white;
+	text-align: center;
+}
+
+#noticias:hover {
+	color: #fff952;
+	text-align: center;
+}
+
+#historia {
+	color: white;
+	text-align: center;
+}
+
+#historia:hover {
+	color: #14ffff;
+	text-align: center;
+}
+
+#membros {
+	color: white;
+	text-align: center;
+}
+
+#membros:hover {
+	color: #7fff00;
+	text-align: center;
+}
+
+#vozDigital {
+	color: white;
+	text-align: center;
+}
+
+#vozDigital:hover {
+	color: #ff1f3d;
+	text-align: center;
+}
+
+#curso {
+	color: white;
+	text-align: center;
+}
+
+#curso:hover {
+	color: #e8ff00;
+	text-align: center;
+}
+
+#gerencia {
+	color: white;
+	text-align: center;
+}
+
+#gerencia:hover {
+	color: #ff14ff;
+	text-align: center;
+}
+
+#sair {
+	color: white;
+	text-align: center;
+}
+
+#sair:hover {
+	color: #e86b11;
+	text-align: center;
+}
+
+#login {
+	color: white;
+	text-align: center;
+}
+
+#login:hover {
+	color: #e86b11;
+	text-align: center;
+}
+
+.text-muted {
+	color: white;
+}
+
+.text-muted:hover {
+	color: black;
+}
+
+#logoNuarte {
+	position: relative;
+	right: 300px;
+	border-right: 0px;
+	margin: auto;
+}
+
+.pos-f-t a:hover {
+	text-decoration: none;
+}
+
+/*Rodapé*/
+
+.footer-menu {
+	padding: 15px;
+	margin: 50px auto;
+	background-color: #f2f2f2;
+	color: #808080;
+	text-align: center;
+}
+
+#pe {
+	font-family: "Poppins", sans-serif, "Times new roman";
+	font-size: 15px;
+}
+
+#pepe {
+	font-family: 'Satisfy', cursive;
+	font-size: 20px;
+}
+
+.h1 {
+	color: #FFFF00 !important;
+	font-family: 'Shadows Into Light Two', cursive!important;
+}
+
+.list-group-item {
+	padding: 5px !important;
+	border: 0px !important;
+}
+
+#botao {
+	width: 150px;
+	position: absolute;
+	margin-top: 280px;
+	right: 40px;
+	z-index: 1;
+	border-radius: 100px;
+	-webkit-box-shadow: 2px 3px 3px 2px black;
+	-moz-box-shadow: 2px 3px 3px 2px black;
+	box-shadow: 2px 3px 3px 2px black;
+}
+
+#botao:hover {
+	-webkit-transform: rotateZ(-30deg);
+	-ms-transform: rotateZ(-30deg);
+	transform: rotateZ(-30deg);
+}
+
+#botao2 {
+	width: 150px;
+	position: absolute;
+	margin-top: 120px;
+	right: 40px;
+	z-index: 1;
+	border-radius: 100px;
+	-webkit-box-shadow: 2px 3px 3px 2px black;
+	-moz-box-shadow: 2px 3px 3px 2px black;
+	box-shadow: 2px 3px 3px 2px black;
+}
+
+#botao2:hover {
+	-webkit-transform: rotateZ(-30deg);
+	-ms-transform: rotateZ(-30deg);
+	transform: rotateZ(-30deg);
+}
+/*imagens de redes sociais ao lado*/
+#p1 {
+	top: 210px;
+	left: 40px;
+}
+
+#p2 {
+	top: 240px;
+	left: 40px;
+}
+
+#p3 {
+	top: 270px;
+	left: 40px;
+}
+
+.sociais {
+	width: 50px;
+	z-index: 1;
+	position: relative;
+}

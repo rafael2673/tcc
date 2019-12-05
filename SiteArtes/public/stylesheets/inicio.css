@@ -1,0 +1,60 @@
+h1 {
+	font-family: Gabriola, 'Yu Gothic UI Light';
+	color: black;
+	font-size: 45px;
+	
+}
+
+.nuarte {
+	font-family: 'Bad Script', cursive;
+	float: left;
+	font-size: 45px;
+}
+
+h2 {
+	font-family: 'Yu Gothic UI Light';
+	text-transform: capitalize;
+	color: black;
+	
+}
+
+p {
+	font-family: calibri, 'Times new Roma', 'Yu Gothic UI Light';
+	text-align: justify;
+	text-transform: none;
+	font-size: 20px;
+	color: black;
+}
+
+
+label {
+	font-family: calibri, 'Times new Roma', 'Yu Gothic UI Light';
+	text-transform: uppercase;
+	color: black;
+}
+
+
+.texto {
+	border-radius: 0.5rem !important;
+	width: 325px !important;
+}
+
+#primeiro {
+	width: 368px;
+}
+
+p {
+	text-indent: 2.5rem;
+}
+
+.card {
+	border: 1px solid #c8c8c8 !important;
+	border-radius: 0.75rem !important;
+	margin: 25px;
+	padding: 5px;
+}
+
+.noticias {
+	background-color: rgba(0,0,0,0%) !important;
+	border: 0px !important;
+}

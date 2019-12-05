@@ -1,0 +1,23 @@
+h1 {
+	color: black;
+	font-family: 'Yu Gothic UI Light';
+	letter-spacing: 5px;
+	text-transform: uppercase;
+}
+
+a:link {
+	text-decoration: none;
+}
+/*label com tons abaixo do ton h1*/
+label, figcaption {
+	color: #e292c3;
+	text-transform: uppercase;
+	font-family: 'Yu Gothic UI Light';
+}
+#del{
+	color: #e292c3;
+	text-transform: uppercase;
+	font-family: 'Yu Gothic UI Light';
+	position: relative;
+	left: 190px;
+}
