@@ -1,10 +1,12 @@
 package controllers;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import models.Membro;
 import models.Noticia;
+import models.Select2VO;
 import play.db.jpa.JPABase;
 import play.mvc.Controller;
 import play.mvc.With;
@@ -43,15 +45,32 @@ public class Noticias extends Controller {
 	 * tem como função listar as noticias com um filtro de pesquisa
 	 * */
 	public static void mostrar() {
-		String busca = params.get("busca");
+		String search = params.get("search");
 		List<Noticia> not = null;
-		if (busca == null || busca.isEmpty()) {
+		if (search == null || search.isEmpty()) {
 			not = Noticia.findAll();
+			renderTemplate("/Noticias/mostrar.html", not);
 		} else {
 			not = Noticia.find("lower(texto) like ?1 order by id desc",
-					"%" + busca.toLowerCase() + "%").fetch();
+					"%" + search.toLowerCase() + "%").fetch();
 		}
 		render(not);
+	}
+	public static void listar(String search) {
+		List<Noticia> not = null;
+		if (search == null || search.isEmpty()) {
+			not = Noticia.findAll();
+			renderTemplate("/Noticias/mostrar.html", not);
+		} else {
+			not = Noticia.find("lower(texto) like ?1 order by id desc",
+					"%" + search.toLowerCase() + "%").fetch();
+		}
+		List<Select2VO> results = new ArrayList<Select2VO>();
+		for (Noticia n : not) {
+			results.add(new Select2VO(n.id, n.texto));
+		}
+		
+		renderJSON(results);
 	}
 
 	public static void editar(long id) {

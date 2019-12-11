@@ -6,9 +6,14 @@
 
 <nav>
   <div class="nav nav-tabs" id="nav-tab" role="tablist">
-    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Home</a>
-    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</a>
-    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</a>
+    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Trabalhos publicados</a>
+    
+    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Suas submissões
+    #{if session.get("usuario.nivel").equals("admin")}
+    / Avaliação de submissões
+    #{/if}
+    </a>
+    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Envie seus projetos</a>
   </div>
 </nav>
 
@@ -16,15 +21,15 @@
 <div class="tab-content" id="nav-tabContent">
   <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
   <br/>
-  	#{if session.get("usuario.nivel")} #{paginate.list items:listaPaginada2, as:'l'}
+  	#{if session.get("usuario.nivel")} 
+  	<div class = "card-columns">
+  	  #{paginate.list items:listaPaginada2, as:'l'}
 		<div class="card" style="width: 18rem;">
 			<div class="card-body">
-				<h5 class="card-title">${l.titulo}</h5>
-				<h6 class="card-subtitle mb-2 text-muted">${l.nome}</h6>
-				<p class="card-text">${l.descricao}</p>
-				<a target="_blank" href="/uploads/pdf/${l?.pdf}">${l.pdf}</a>
-				
-				<br /> 
+				<h5 class="card-title">${l.submissao.titulo}</h5>
+				<p class="card-text">${l.submissao.descricao}</p>
+				<a target="_blank" href="/uploads/pdf/${l?.submissao.pdf}">${l.submissao.pdf}</a>
+				<p class="card-text"><b>Autor:</b> ${l.login.nome} ${l.login.sobrenome}</p>
 				#{if
 				session.get("usuario.nivel").equals("admin")} 
 				<a href='@{VozDigital.deletar(l.id)}' > 
@@ -34,9 +39,12 @@
 			</div>
 		</div>
 		
-		#{/paginate.list} #{else}
+		#{/paginate.list} 
+  	</div>
+	    #{else}
 		<p>Nenhum trabalho avaliado</p>
-		#{/else} #{/if}
+		#{/else}
+	 #{/if}
   </div>
   
   
@@ -45,10 +53,11 @@
 		#{if session.get("usuario.nivel").equals("admin")}
 		<br />
 		<br />
+		<h3>Avaliação de Submissões</h3>
 		<table class="table table-striped table-dark">
 			<thead>
 				<tr>
-					<th scope="col">Nome do usuário</th>
+					<th scope="col">Nome</th>
 					<th scope="col">Título</th>
 					<th scope="col">Descrição</th>
 					<th scope="col">PDF</th>
@@ -58,12 +67,12 @@
 			<tbody>
 				#{paginate.list items:listaPaginada, as:'l'}
 				<tr>
-					<td>${l?.nome}</td>
-					<td>${l?.titulo}</td>
-					<td>${l?.descricao}</td>
-					<td><a target="_blank" href="/uploads/pdf/${l?.pdf}">${l?.pdf}</a></td>
+					<td>${l?.login.nome} ${l?.login.sobrenome}</td>
+					<td>${l?.submissao.titulo}</td>
+					<td>${l?.submissao.descricao}</td>
+					<td><a target="_blank" href="/uploads/pdf/${l?.submissao.pdf}">${l?.submissao.pdf}</a></td>
 					<td>
-						<form action="@{VozDigital.publicacao}">
+						<form action="@{VozDigital.publicacao}" method="post">
 							<input type="hidden" value="${l.id}" name="id">
 							<div class="input-group">
 								<select name="n" class="custom-select">
@@ -81,6 +90,32 @@
 				<td colspan="5">Nenhuma solicitação de envio</td> #{/else}
 			</tbody>
 		</table>
+		#{/if}
+		#{if session.get("usuario.nivel")}
+		<br />
+		<br />
+			<h3>Suas submissões</h3>
+			<table class="table table-striped table-dark">
+				<thead>
+					<tr>
+						<th scope="col">Título</th>
+						<th scope="col">Descrição</th>
+						<th scope="col">PDF</th>
+					</tr>
+				</thead>
+				<tbody>
+					#{list items:v3, as:'l'}
+					<tr>
+						<td>${l?.submissao.titulo}</td>
+						<td>${l?.submissao.descricao}</td>
+						<td><a target="_blank" href="/uploads/pdf/${l?.submissao.pdf}">${l?.submissao.pdf}</a></td>
+					</tr>
+					#{/list}
+					#{else}
+					<td colspan="5">Nenhuma submissão de projeto</td>
+					#{/else}
+					</tbody>
+			</table>
 		#{/if}
   </div>
 

@@ -1,25 +1,21 @@
 #{extends 'main.html'/} #{set title:'Lista de noticias' /}
 
 <form method="post" action="@{Noticias.mostrar}">
-	<input type="text" name="busca" class="form-control" class = "select2">
+	<input type="text" name="search" class="form-control texto">
 	<button value="Pesquisar" class="btn btn-outline-info">Pesquisar</button>
 </form>
-<link href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css" rel="stylesheet" />
-<script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
+
 <script type="text/javascript">
 $(document).ready(function() {
-    $('.select2').select2({
-    	ajax: {
+    $.ajax ({
     	    url: '@{Noticias.listar}',
-    	     dataType:"json",
-    	     type:"POST",
     	    data: function (params) {
     	      var query = {
-    	        busca: params.term
+    	        search: params.term
     	      }
 
     	      // Query parameters will be ?search=[term]&type=public
-    	      return query;
+    	      $('.texto').return({query});
     	    },
     	    processResults: function (data) {
     	        // Transforms the top-level key of the response object from 'items' to 'results'
@@ -27,7 +23,6 @@ $(document).ready(function() {
     	          results: data
     	        };
     	    }
-    	  }
     });
 });
 </script>

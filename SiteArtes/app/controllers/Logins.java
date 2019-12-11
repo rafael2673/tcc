@@ -12,7 +12,6 @@ import play.data.validation.Valid;
 import play.db.jpa.JPABase;
 import play.libs.Crypto;
 import play.libs.Mail;
-import play.modules.paginate.ValuePaginator;
 import play.mvc.Controller;
 
 /**
