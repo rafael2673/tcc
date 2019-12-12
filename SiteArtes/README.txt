@@ -1,6 +1,6 @@
 Aqui estarão todos os arquivos relacionados ao site. 
 
-Este, foi criado com o auxilio do Framework de desenvolvimento Play e linguagem de programação Java, na função de Back-end e foi
+Este, foi criado com o auxilio do Framework de desenvolvimento Play e linguagem de programação Java na função de Back-end e, foi
 utilizado bootstrap e Javascript na função de Front-end.
 
 Para rodar ele (Funciona apenas no eclipse) precisa baixar o play framework 1.5 através do link:
