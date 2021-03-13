@@ -14,7 +14,8 @@ play dependencies /pastadoprojeto/SiteArtes
 play eclipsify /pastadoprojeto/SiteArtes
 
 Provavelmente quando importar o projeto no eclipse vai dar um erro de docview duplicada, é só remover um que dá certo.
-
+Se mesmo depois de remover o docview duplicado não funcionar, veja se a versão java instalada é a versão 8, pois como 
+é uma versão antiga a do play, só funciona com uma versão antiga do Java.
 
 Para desenvolvimentos com o play framework sugiro uma série de video aulas que me ajudaram bastante:
 
